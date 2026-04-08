@@ -33,6 +33,13 @@ export function useRealtimeVisitors(): { count: number; isLive: boolean } {
     // ── Mode A: Supabase Realtime Presence ──────────────────────────────────
     if (isSupabaseConfigured()) {
       const supabase = createClient()
+      
+      // Clean up any existing channel to prevent React Strict Mode / HMR errors
+      const existingChannel = supabase.getChannels().find((c) => c.topic === "realtime:pinhire_visitors")
+      if (existingChannel) {
+        supabase.removeChannel(existingChannel)
+      }
+
       const channel = supabase.channel("pinhire_visitors", {
         config: {
           presence: { key: sessionId },
