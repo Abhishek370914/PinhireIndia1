@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { MapPin, Briefcase, Globe, Share2 } from 'lucide-react'
 import type { MatchedCompany } from './PinYourImpact'
 
-export default function TalentMap({ companies, userProfile }: { companies: MatchedCompany[]; userProfile: any }) {
+export default function TalentMap({ companies, userProfile, onViewGlobe }: { companies: MatchedCompany[]; userProfile: any; onViewGlobe?: () => void }) {
   const [selectedCompany, setSelectedCompany] = useState<MatchedCompany | null>(companies[0] || null)
   const [pinnedLocations, setPinnedLocations] = useState<string[]>([])
 
@@ -207,6 +207,20 @@ export default function TalentMap({ companies, userProfile }: { companies: Match
                       <Share2 className="w-4 h-4" />
                       Share Profile
                     </motion.button>
+
+                    {onViewGlobe && (
+                      <motion.button
+                        onClick={onViewGlobe}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full py-3 rounded-lg font-semibold bg-cyan-500/20 border border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/30 transition-all flex items-center justify-center gap-2"
+                      >
+                        <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}>
+                          <Globe className="w-4 h-4" />
+                        </motion.div>
+                        Explore on 3D Globe
+                      </motion.button>
+                    )}
                   </div>
 
                   {/* Pin Count */}

@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles, ArrowRight, MapPin, Users, Award, Zap } from 'lucide-react'
+import { Sparkles, ArrowRight, MapPin, Users, Award, Zap, Globe } from 'lucide-react'
 import AIPathfinderForm from './AIPathfinderForm'
 import TalentMap from './TalentMap'
 
-type View = 'hero' | 'quiz' | 'map' | 'results'
+const GlobeExplorer = lazy(() => import('./GlobeExplorer'))
+
+type View = 'hero' | 'quiz' | 'map' | 'results' | 'globe'
 
 interface UserProfile {
   skills: string[]
@@ -50,6 +52,14 @@ export default function PinYourImpact() {
     setView('map')
   }
 
+  const handleViewGlobe = () => {
+    setView('globe')
+  }
+
+  const handleCloseGlobe = () => {
+    setView('hero')
+  }
+
   const handleBackToResults = () => {
     setView('results')
   }
@@ -66,7 +76,7 @@ export default function PinYourImpact() {
       <div className="relative z-10">
         <AnimatePresence mode="wait">
           {view === 'hero' && (
-            <HeroSection key="hero" onStartQuiz={handleStartQuiz} participantCount={participantCount} />
+            <HeroSection key="hero" onStartQuiz={handleStartQuiz} onViewGlobe={handleViewGlobe} participantCount={participantCount} />
           )}
 
           {view === 'quiz' && (
@@ -79,14 +89,21 @@ export default function PinYourImpact() {
               profile={userProfile}
               companies={matchedCompanies}
               onViewMap={handleViewMap}
+              onViewGlobe={handleViewGlobe}
               participantCount={participantCount}
             />
           )}
 
           {view === 'map' && userProfile && matchedCompanies.length > 0 && (
             <motion.div key="map" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <TalentMap companies={matchedCompanies} userProfile={userProfile} />
+              <TalentMap companies={matchedCompanies} userProfile={userProfile} onViewGlobe={handleViewGlobe} />
             </motion.div>
+          )}
+
+          {view === 'globe' && (
+            <Suspense fallback={<div className="w-full h-screen flex items-center justify-center bg-black"><motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity }} className="w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full" /></div>}>
+              <GlobeExplorer key="globe" onClose={handleCloseGlobe} />
+            </Suspense>
           )}
         </AnimatePresence>
       </div>
@@ -94,7 +111,7 @@ export default function PinYourImpact() {
   )
 }
 
-function HeroSection({ onStartQuiz, participantCount }: { onStartQuiz: () => void; participantCount: number }) {
+function HeroSection({ onStartQuiz, onViewGlobe, participantCount }: { onStartQuiz: () => void; onViewGlobe: () => void; participantCount: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -182,6 +199,33 @@ function HeroSection({ onStartQuiz, participantCount }: { onStartQuiz: () => voi
           </span>
         </motion.button>
 
+        {/* Globe Explorer Button */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={onViewGlobe}
+          className="group relative px-10 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-lg shadow-[0_20px_60px_rgba(6,182,212,0.3)] overflow-hidden mt-6"
+        >
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+            animate={{ x: '150%' }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: 0.7 }}
+          />
+          <span className="relative z-10 flex items-center gap-2">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+            >
+              <Globe className="w-5 h-5" />
+            </motion.div>
+            Explore Companies Near Me
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </motion.button>
+
         {/* Secondary Button */}
         <motion.p
           initial={{ opacity: 0 }}
@@ -200,11 +244,13 @@ function ResultsSection({
   profile,
   companies,
   onViewMap,
+  onViewGlobe,
   participantCount,
 }: {
   profile: UserProfile
   companies: MatchedCompany[]
   onViewMap: () => void
+  onViewGlobe: () => void
   participantCount: number
 }) {
   return (
@@ -295,12 +341,19 @@ function ResultsSection({
         >
           <button
             onClick={onViewMap}
-            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold transition-all shadow-lg"
+            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold transition-all shadow-lg flex items-center justify-center gap-2"
           >
-            <span className="flex items-center gap-2">
-              <MapPin className="w-5 h-5" />
-              View Talent Map
-            </span>
+            <MapPin className="w-5 h-5" />
+            View Talent Map
+          </button>
+          <button
+            onClick={onViewGlobe}
+            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+          >
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}>
+              <Globe className="w-5 h-5" />
+            </motion.div>
+            Explore on Globe
           </button>
           <a
             href="/remote-jobs"
