@@ -31,7 +31,7 @@ export default function JobsPage() {
       const q = search.toLowerCase()
       const matchesSearch = !search
         || j.title.toLowerCase().includes(q)
-        || j.skills.some((s) => s.toLowerCase().includes(q))
+        || j.skills?.some((s) => s.toLowerCase().includes(q))
         || j.company?.name.toLowerCase().includes(q)
         || j.company?.city.toLowerCase().includes(q)
       const matchesType = jobType === "All" || j.job_type === jobType
