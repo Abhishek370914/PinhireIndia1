@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, memo, Suspense } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MapPin, Briefcase, Building2, ArrowRight, Mail, Sparkles } from "lucide-react"
+import { MapPin, Briefcase, Building2, ArrowRight, Mail, Sparkles, Globe, Zap } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -198,6 +198,79 @@ export default function WelcomePage() {
                   />
                 </Button>
               </motion.div>
+
+              {/* Remote Jobs Button - Advanced Animated */}
+              <Link href="/remote-jobs">
+                <motion.div
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={{ hover: { y: -6 }, tap: { y: -2 } }}
+                  className="relative group cursor-pointer"
+                >
+                  {/* Premium Glow Effect */}
+                  <motion.div 
+                    className="absolute -inset-1 bg-gradient-to-r from-green-500 via-blue-500 to-cyan-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 -z-10"
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                  
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-blue-500/20 to-cyan-500/20 rounded-3xl blur-2xl opacity-30 group-hover:opacity-60 -z-10"
+                    animate={{ scale: [1, 1.02, 1], rotate: [0, 1, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  />
+
+                  <Button 
+                    className="relative bg-gradient-to-br from-green-600 via-blue-600 to-cyan-600 hover:from-green-500 hover:via-blue-500 hover:to-cyan-500 text-white font-900 text-xl h-20 px-14 rounded-3xl gap-3 shadow-[0_25px_60px_rgba(16,185,129,0.25)] overflow-hidden border border-green-400/30 hover:border-green-300/60 transition-all duration-300 group"
+                  >
+                    {/* Animated shimmer effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"
+                      animate={{ x: '150%' }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                    />
+
+                    {/* Floating particles */}
+                    <motion.div
+                      className="absolute top-2 left-4 w-2 h-2 bg-green-300 rounded-full"
+                      animate={{ y: [0, -10, 0], opacity: [0, 1, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <motion.div
+                      className="absolute bottom-3 right-6 w-1.5 h-1.5 bg-cyan-300 rounded-full"
+                      animate={{ y: [0, 10, 0], opacity: [0, 1, 0] }}
+                      transition={{ duration: 2.5, repeat: Infinity, delay: 0.3 }}
+                    />
+
+                    {/* Button Content */}
+                    <span className="relative z-10 flex items-center gap-3 group-hover:gap-4 transition-all duration-300">
+                      <motion.div
+                        animate={{ rotate: [0, 360] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        className="flex-shrink-0"
+                      >
+                        <Globe className="w-6 h-6" />
+                      </motion.div>
+                      Remote Jobs
+                      <motion.div
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="flex-shrink-0"
+                      >
+                        <Zap className="w-5 h-5" />
+                      </motion.div>
+                    </span>
+
+                    {/* Hover indicator */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-green-400 via-blue-400 to-cyan-400 rounded-full"
+                      initial={{ width: 0 }}
+                      whileHover={{ width: '100%' }}
+                      transition={{ duration: 0.4 }}
+                    />
+                  </Button>
+                </motion.div>
+              </Link>
 
               <div className="flex gap-4">
                 {[
