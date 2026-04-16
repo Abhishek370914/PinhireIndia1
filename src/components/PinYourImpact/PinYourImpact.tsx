@@ -2,13 +2,14 @@
 
 import { useState, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles, ArrowRight, MapPin, Users, Award, Zap, Globe } from 'lucide-react'
+import { Sparkles, ArrowRight, MapPin, Users, Award, Zap, Globe, Landmark } from 'lucide-react'
 import AIPathfinderForm from './AIPathfinderForm'
 import TalentMap from './TalentMap'
 
 const GlobeExplorer = lazy(() => import('./GlobeExplorer'))
+const TalentPassport = lazy(() => import('../TalentPassport/TalentPassport'))
 
-type View = 'hero' | 'quiz' | 'map' | 'results' | 'globe'
+type View = 'hero' | 'quiz' | 'map' | 'results' | 'globe' | 'passport'
 
 interface UserProfile {
   skills: string[]
@@ -60,6 +61,14 @@ export default function PinYourImpact() {
     setView('hero')
   }
 
+  const handleViewPassport = () => {
+    setView('passport')
+  }
+
+  const handleClosePassport = () => {
+    setView('results')
+  }
+
   const handleBackToResults = () => {
     setView('results')
   }
@@ -90,6 +99,7 @@ export default function PinYourImpact() {
               companies={matchedCompanies}
               onViewMap={handleViewMap}
               onViewGlobe={handleViewGlobe}
+              onViewPassport={handleViewPassport}
               participantCount={participantCount}
             />
           )}
@@ -103,6 +113,17 @@ export default function PinYourImpact() {
           {view === 'globe' && (
             <Suspense fallback={<div className="w-full h-screen flex items-center justify-center bg-black"><motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity }} className="w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full" /></div>}>
               <GlobeExplorer key="globe" onClose={handleCloseGlobe} />
+            </Suspense>
+          )}
+
+          {view === 'passport' && userProfile && (
+            <Suspense fallback={<div className="w-full h-screen flex items-center justify-center bg-black"><motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity }} className="w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full" /></div>}>
+              <TalentPassport 
+                key="passport"
+                userProfile={userProfile}
+                matchedCompanies={matchedCompanies}
+                onClose={handleClosePassport}
+              />
             </Suspense>
           )}
         </AnimatePresence>
@@ -245,12 +266,14 @@ function ResultsSection({
   companies,
   onViewMap,
   onViewGlobe,
+  onViewPassport,
   participantCount,
 }: {
   profile: UserProfile
   companies: MatchedCompany[]
   onViewMap: () => void
   onViewGlobe: () => void
+  onViewPassport: () => void
   participantCount: number
 }) {
   return (
@@ -354,6 +377,13 @@ function ResultsSection({
               <Globe className="w-5 h-5" />
             </motion.div>
             Explore on Globe
+          </button>
+          <button
+            onClick={onViewPassport}
+            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+          >
+            <Landmark className="w-5 h-5" />
+            My Talent Passport
           </button>
           <a
             href="/remote-jobs"
