@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, memo, Suspense } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MapPin, Briefcase, Building2, ArrowRight, Mail, Sparkles, Globe, Zap } from "lucide-react"
+import { MapPin, Briefcase, Building2, ArrowRight, Mail, Sparkles, Globe, Zap, Search, Store } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -272,22 +272,136 @@ export default function WelcomePage() {
                 </motion.div>
               </Link>
 
-              <div className="flex gap-4">
-                {[
-                  { label: "Find Jobs", href: "/jobs" },
-                  { label: "Browse Companies", href: "/companies" }
-                ].map((btn) => (
-                  <Link key={btn.label} href={btn.href}>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+              <div className="flex flex-col sm:flex-row gap-4">
+                {/* Find Jobs Button */}
+                <Link href="/jobs">
+                  <motion.div
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={{ hover: { y: -8 }, tap: { y: -2 } }}
+                    className="relative group cursor-pointer"
+                  >
+                    {/* Glow Effect - Purple/Blue */}
+                    <motion.div 
+                      className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-65 transition-opacity duration-500 -z-10"
+                      animate={{ scale: [1, 1.06, 1] }}
+                      transition={{ duration: 2.5, repeat: Infinity }}
+                    />
+                    
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-red-500/20 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 -z-10"
+                      animate={{ scale: [1, 1.03, 1], rotate: [0, 2, 0] }}
+                      transition={{ duration: 3.5, repeat: Infinity }}
+                    />
+
+                    <Button 
+                      className="relative bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 hover:from-purple-500 hover:via-pink-500 hover:to-red-500 text-white font-bold text-lg h-16 px-10 rounded-2xl shadow-[0_20px_50px_rgba(168,85,247,0.2)] overflow-hidden border border-purple-400/40 hover:border-purple-300/70 transition-all duration-300 group min-w-[200px] flex items-center justify-center gap-3"
                     >
-                      <Button variant="outline" className="border-white/10 bg-white/[0.02] hover:bg-white/[0.05] text-white font-bold h-16 px-10 rounded-2xl min-w-[200px] text-lg hover:border-saffron/50 transition-all backdrop-blur-sm">
-                        {btn.label}
-                      </Button>
-                    </motion.div>
-                  </Link>
-                ))}
+                      {/* Animated shimmer */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full"
+                        animate={{ x: '150%' }}
+                        transition={{ duration: 1.8, repeat: Infinity, delay: 0.3 }}
+                      />
+
+                      {/* Floating dots */}
+                      <motion.div
+                        className="absolute top-3 right-4 w-1.5 h-1.5 bg-pink-300 rounded-full"
+                        animate={{ y: [0, -12, 0], opacity: [0, 1, 0] }}
+                        transition={{ duration: 2.2, repeat: Infinity }}
+                      />
+                      <motion.div
+                        className="absolute bottom-2 left-3 w-1 h-1 bg-red-300 rounded-full"
+                        animate={{ y: [0, 12, 0], opacity: [0, 1, 0] }}
+                        transition={{ duration: 2.8, repeat: Infinity, delay: 0.5 }}
+                      />
+
+                      {/* Content with icon */}
+                      <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                        <motion.div
+                          animate={{ rotate: [-5, 5, -5], scale: [1, 1.1, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <Search className="w-5 h-5" />
+                        </motion.div>
+                        Find Jobs
+                      </span>
+
+                      {/* Bottom animated line */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    </Button>
+                  </motion.div>
+                </Link>
+
+                {/* Browse Companies Button */}
+                <Link href="/companies">
+                  <motion.div
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={{ hover: { y: -8 }, tap: { y: -2 } }}
+                    className="relative group cursor-pointer"
+                  >
+                    {/* Glow Effect - Cyan/Teal */}
+                    <motion.div 
+                      className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-teal-500 to-green-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-65 transition-opacity duration-500 -z-10"
+                      animate={{ scale: [1, 1.06, 1] }}
+                      transition={{ duration: 2.5, repeat: Infinity, delay: 0.3 }}
+                    />
+                    
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-teal-500/20 to-green-500/20 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 -z-10"
+                      animate={{ scale: [1, 1.03, 1], rotate: [0, -2, 0] }}
+                      transition={{ duration: 3.5, repeat: Infinity, delay: 0.2 }}
+                    />
+
+                    <Button 
+                      className="relative bg-gradient-to-br from-cyan-600 via-teal-600 to-green-600 hover:from-cyan-500 hover:via-teal-500 hover:to-green-500 text-white font-bold text-lg h-16 px-10 rounded-2xl shadow-[0_20px_50px_rgba(34,211,238,0.2)] overflow-hidden border border-cyan-400/40 hover:border-cyan-300/70 transition-all duration-300 group min-w-[200px] flex items-center justify-center gap-3"
+                    >
+                      {/* Animated shimmer */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full"
+                        animate={{ x: '150%' }}
+                        transition={{ duration: 1.8, repeat: Infinity, delay: 0.6 }}
+                      />
+
+                      {/* Floating dots */}
+                      <motion.div
+                        className="absolute top-2 left-4 w-1.5 h-1.5 bg-cyan-300 rounded-full"
+                        animate={{ y: [0, -12, 0], opacity: [0, 1, 0] }}
+                        transition={{ duration: 2.2, repeat: Infinity, delay: 0.2 }}
+                      />
+                      <motion.div
+                        className="absolute bottom-3 right-3 w-1 h-1 bg-green-300 rounded-full"
+                        animate={{ y: [0, 12, 0], opacity: [0, 1, 0] }}
+                        transition={{ duration: 2.8, repeat: Infinity, delay: 0.7 }}
+                      />
+
+                      {/* Content with icon */}
+                      <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+                        <motion.div
+                          animate={{ rotate: [5, -5, 5], scale: [1, 1.1, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                        >
+                          <Store className="w-5 h-5" />
+                        </motion.div>
+                        Browse Companies
+                      </span>
+
+                      {/* Bottom animated line */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-cyan-400 via-teal-400 to-green-400"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    </Button>
+                  </motion.div>
+                </Link>
               </div>
             </motion.div>
 
