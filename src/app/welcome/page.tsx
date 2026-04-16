@@ -176,27 +176,110 @@ export default function WelcomePage() {
             </motion.div>
 
             {/* Premium CTAs */}
-            <motion.div variants={item} className="flex flex-col md:flex-row items-center justify-center gap-8 pt-4">
-              <motion.div
-                whileHover="hover"
-                whileTap="tap"
-                className="relative"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-saffron to-[#FF0080] blur-2xl rounded-3xl -z-10 opacity-30" />
-                
-                <Button 
-                  onClick={handleExploreClick}
-                  className="bg-gradient-to-r from-saffron to-[#FF0080] hover:from-saffron hover:to-[#FF0080] text-white font-900 text-xl h-20 px-14 rounded-3xl gap-4 shadow-[0_20px_50px_rgba(255,107,0,0.2)] group relative overflow-hidden"
+            <motion.div variants={item} className="flex flex-col items-center justify-center gap-8 pt-4 w-full">
+              {/* Featured Pin Your Impact Button */}
+              <Link href="/pin-your-impact" className="w-full">
+                <motion.div
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={{ hover: { y: -8 }, tap: { y: -2 } }}
+                  className="relative group cursor-pointer max-w-2xl mx-auto"
                 >
-                  <span className="relative z-10 flex items-center gap-3">
-                    Explore Map
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
-                    variants={{ hover: { x: '100%', transition: { duration: 0.6 } } }}
+                  {/* Ultra Premium Multi-Layer Glow */}
+                  <motion.div 
+                    className="absolute -inset-2 bg-gradient-to-r from-green-400 via-blue-500 to-cyan-400 rounded-3xl blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500 -z-10"
+                    animate={{ scale: [1, 1.08, 1], rotate: [0, 2, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
                   />
-                </Button>
+                  <motion.div 
+                    className="absolute -inset-1 bg-gradient-to-r from-green-500/40 via-blue-500/40 to-cyan-500/40 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 -z-10"
+                    animate={{ scale: [1, 1.04, 1], rotate: [0, -1, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, delay: 0.3 }}
+                  />
+
+                  <Button 
+                    className="relative w-full bg-gradient-to-r from-green-600 via-blue-600 to-cyan-600 hover:from-green-500 hover:via-blue-500 hover:to-cyan-500 text-white font-900 text-2xl h-24 rounded-3xl shadow-[0_30px_80px_rgba(16,185,129,0.35)] overflow-hidden border-2 border-green-400/40 hover:border-green-300/80 transition-all duration-300 group flex items-center justify-center gap-4"
+                  >
+                    {/* Premium Shimmer Effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full"
+                      animate={{ x: '150%' }}
+                      transition={{ duration: 1.2, repeat: Infinity }}
+                    />
+
+                    {/* Animated Corner Orbs */}
+                    <motion.div
+                      className="absolute top-4 left-6 w-3 h-3 bg-green-300 rounded-full filter blur-sm"
+                      animate={{ y: [0, -15, 0], opacity: [0.3, 1, 0.3], scale: [1, 1.3, 1] }}
+                      transition={{ duration: 2.2, repeat: Infinity }}
+                    />
+                    <motion.div
+                      className="absolute bottom-5 right-8 w-2 h-2 bg-cyan-300 rounded-full filter blur-sm"
+                      animate={{ y: [0, 15, 0], opacity: [0.3, 1, 0.3], scale: [1, 1.3, 1] }}
+                      transition={{ duration: 2.5, repeat: Infinity, delay: 0.4 }}
+                    />
+                    <motion.div
+                      className="absolute top-1/2 right-4 w-2 h-2 bg-blue-300 rounded-full filter blur-sm"
+                      animate={{ x: [0, 12, 0], opacity: [0.2, 0.8, 0.2], scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                    />
+
+                    {/* Content with Icons */}
+                    <span className="relative z-10 flex items-center gap-4 group-hover:gap-5 transition-all duration-300">
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        className="flex-shrink-0"
+                      >
+                        <Sparkles className="w-7 h-7" />
+                      </motion.div>
+                      <div className="flex flex-col items-start gap-1">
+                        <span className="text-xs font-bold opacity-90 uppercase tracking-widest">AI-Powered Matching</span>
+                        <span className="text-2xl font-black">Pin Your Impact</span>
+                      </div>
+                      <motion.div
+                        animate={{ x: [0, 6, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="flex-shrink-0 ml-2"
+                      >
+                        <ArrowRight className="w-6 h-6" />
+                      </motion.div>
+                    </span>
+
+                    {/* Bottom Glow Line */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-green-400 via-blue-400 to-cyan-400"
+                      initial={{ width: 0 }}
+                      whileHover={{ width: '100%' }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </Button>
+                </motion.div>
+              </Link>
+
+              {/* Secondary CTA Row */}
+              <motion.div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
+                <motion.div
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="relative"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-saffron to-[#FF0080] blur-2xl rounded-3xl -z-10 opacity-30" />
+                  
+                  <Button 
+                    onClick={handleExploreClick}
+                    className="bg-gradient-to-r from-saffron to-[#FF0080] hover:from-saffron hover:to-[#FF0080] text-white font-900 text-xl h-20 px-14 rounded-3xl gap-4 shadow-[0_20px_50px_rgba(255,107,0,0.2)] group relative overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center gap-3">
+                      Explore Map
+                      <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                    </span>
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+                      variants={{ hover: { x: '100%', transition: { duration: 0.6 } } }}
+                    />
+                  </Button>
+                </motion.div>
               </motion.div>
 
               {/* Remote Jobs Button - Advanced Animated */}
