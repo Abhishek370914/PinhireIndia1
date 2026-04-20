@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Download, Share2, Trophy, Zap, Globe, Award, MessageCircle } from 'lucide-react'
-import { useRef } from 'react'
+import { useRef, memo, useCallback } from 'react'
 import html2canvas from 'html2canvas'
 
 export interface PassportData {
@@ -17,7 +17,7 @@ export interface PassportData {
   companiesMatched: number
 }
 
-export default function PassportCard({
+function PassportCardComponent({
   data,
   onShare,
   isShareable = true,
@@ -53,7 +53,7 @@ export default function PassportCard({
       {/* Passport Card */}
       <div
         ref={cardRef}
-        className="relative bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-900 rounded-3xl border-2 border-green-500/30 overflow-hidden p-8 shadow-2xl"
+        className="relative bg-linear-to-br from-slate-900 via-blue-900/50 to-slate-900 rounded-3xl border-2 border-green-500/30 overflow-hidden p-8 shadow-2xl"
         style={{
           backgroundImage: `
             radial-gradient(circle at 20% 50%, rgba(22, 163, 74, 0.1) 0%, transparent 50%),
@@ -62,8 +62,8 @@ export default function PassportCard({
         }}
       >
         {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tl from-blue-500/20 to-transparent rounded-full blur-3xl -z-10" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-green-500/20 to-transparent rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-linear-to-tl from-blue-500/20 to-transparent rounded-full blur-3xl -z-10" />
 
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -76,13 +76,13 @@ export default function PassportCard({
 
         {/* Impact Score Display */}
         <motion.div
-          className="relative p-6 rounded-2xl bg-gradient-to-r from-green-600/20 to-blue-600/20 border border-green-500/30 mb-6 overflow-hidden"
+          className="relative p-6 rounded-2xl bg-linear-to-r from-green-600/20 to-blue-600/20 border border-green-500/30 mb-6 overflow-hidden"
           animate={{ boxShadow: ['0 0 20px rgba(34, 197, 94, 0.2)', '0 0 40px rgba(34, 197, 94, 0.4)', '0 0 20px rgba(34, 197, 94, 0.2)'] }}
           transition={{ duration: 3, repeat: Infinity }}
         >
           <div className="relative z-10">
             <p className="text-xs text-gray-400 mb-1">IMPACT SCORE</p>
-            <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+            <p className="text-5xl font-black text-transparent bg-clip-text bg-linear-to-r from-green-400 to-blue-400">
               {data.impactScore}
             </p>
             <p className="text-sm text-gray-300 mt-2">Global Rank: #{data.globalRank}</p>
@@ -115,7 +115,7 @@ export default function PassportCard({
                 whileHover={{ scale: 1.1 }}
                 className={`w-12 h-12 rounded-full flex items-center justify-center text-xl ${
                   badge.earned
-                    ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-lg'
+                    ? 'bg-linear-to-br from-yellow-400 to-yellow-600 shadow-lg'
                     : 'bg-white/5 border border-white/20 opacity-40'
                 }`}
                 title={badge.name}
@@ -179,7 +179,7 @@ export default function PassportCard({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={downloadCard}
-            className="flex-1 p-3 rounded-xl bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg"
+            className="flex-1 p-3 rounded-xl bg-linear-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg"
           >
             <Download className="w-4 h-4" />
             Download
@@ -188,7 +188,7 @@ export default function PassportCard({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={onShare}
-            className="flex-1 p-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg"
+            className="flex-1 p-3 rounded-xl bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg"
           >
             <Share2 className="w-4 h-4" />
             Share
@@ -198,3 +198,5 @@ export default function PassportCard({
     </motion.div>
   )
 }
+
+export default memo(PassportCardComponent)

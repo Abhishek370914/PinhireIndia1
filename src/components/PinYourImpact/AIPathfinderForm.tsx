@@ -94,7 +94,7 @@ export default function AIPathfinderForm({
           </div>
           <div className="h-2 bg-white/10 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-green-500 to-blue-500"
+              className="h-full bg-linear-to-r from-green-500 to-blue-500"
               initial={{ width: `${(step / 5) * 100}%` }}
               animate={{ width: `${((step + 1) / 5) * 100}%` }}
               transition={{ duration: 0.6 }}
@@ -196,7 +196,7 @@ export default function AIPathfinderForm({
                 placeholder="e.g., India, USA, Global, Remote"
                 value={formData.location}
                 onChange={e => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                className="w-full p-4 rounded-lg bg-white/[0.05] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500"
+                className="w-full p-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500"
               />
             </QuestionContainer>
           )}
@@ -211,7 +211,7 @@ export default function AIPathfinderForm({
                 placeholder="e.g., Help India achieve rare earth independence, Build sustainable supply chains, Advance EV magnet technology..."
                 value={formData.impact}
                 onChange={e => setFormData(prev => ({ ...prev, impact: e.target.value }))}
-                className="w-full p-4 rounded-lg bg-white/[0.05] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 h-24 resize-none"
+                className="w-full p-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-green-500 h-24 resize-none"
               />
             </QuestionContainer>
           )}
@@ -239,7 +239,7 @@ export default function AIPathfinderForm({
                 (step === 1 && !formData.experience) ||
                 (step === 2 && !formData.interests)
               }
-              className="px-8 py-3 rounded-lg bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:from-green-500 hover:to-blue-500 transition-all flex items-center gap-2"
+              className="px-8 py-3 rounded-lg bg-[#166534] hover:bg-[#0d4620] text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 border border-[#1e7741]"
             >
               Next
               <ArrowRight className="w-4 h-4" />
@@ -248,7 +248,7 @@ export default function AIPathfinderForm({
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="px-8 py-3 rounded-lg bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:from-green-500 hover:to-blue-500 transition-all flex items-center gap-2"
+              className="px-8 py-3 rounded-lg bg-[#166534] hover:bg-[#0d4620] text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 border border-[#1e7741]"
             >
               {loading ? (
                 <>

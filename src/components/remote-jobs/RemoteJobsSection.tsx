@@ -76,7 +76,7 @@ export default function RemoteJobsSection() {
   }, [selectedRole, searchQuery])
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white via-blue-50 to-green-50">
+    <section className="py-16 bg-linear-to-b from-white via-blue-50 to-green-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -86,7 +86,7 @@ export default function RemoteJobsSection() {
           className="text-center mb-12"
         >
           <h2 className="text-5xl sm:text-6xl font-black mb-4">
-            <span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
               🌐 Remote Jobs Worldwide
             </span>
           </h2>
@@ -173,9 +173,9 @@ export default function RemoteJobsSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 overflow-hidden border-t-4 border-gradient-to-r from-blue-600 to-green-600"
+              className="bg-white rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 overflow-hidden border-t-4 border-transparent bg-linear-to-t from-blue-600 to-green-600"
             >
-              <div className="h-1 bg-gradient-to-r from-blue-600 to-green-600"></div>
+              <div className="h-1 bg-linear-to-r from-blue-600 to-green-600"></div>
 
               <div className="p-6">
                 {/* Company Name */}
@@ -218,7 +218,7 @@ export default function RemoteJobsSection() {
                   href={company.careerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 w-full justify-center px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition transform hover:translate-x-1"
+                  className="inline-flex items-center gap-2 w-full justify-center px-4 py-3 bg-[#166534] hover:bg-[#0d4620] text-white font-semibold rounded-lg transition shadow-md border border-[#1e7741]"
                 >
                   View Careers
                   <ExternalLink className="w-4 h-4" />
@@ -277,7 +277,7 @@ export default function RemoteJobsSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-8 border-l-4 border-blue-600"
+          className="bg-linear-to-r from-blue-50 to-green-50 rounded-xl p-8 border-l-4 border-blue-600"
         >
           <h4 className="text-lg font-bold text-blue-600 mb-3">📌 Important Information</h4>
           <p className="text-gray-700 mb-3">

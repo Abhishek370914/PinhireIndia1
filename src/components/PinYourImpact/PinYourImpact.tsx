@@ -12,6 +12,7 @@ const TalentPassport = lazy(() => import('../TalentPassport/TalentPassport'))
 type View = 'hero' | 'quiz' | 'map' | 'results' | 'globe' | 'passport'
 
 interface UserProfile {
+  name: string
   skills: string[]
   experience: string
   interests: string
@@ -43,7 +44,12 @@ export default function PinYourImpact() {
   }
 
   const handleQuizComplete = (profile: UserProfile, companies: MatchedCompany[]) => {
-    setUserProfile(profile)
+    // Ensure name is provided with fallback
+    const normalizedProfile: UserProfile = {
+      ...profile,
+      name: profile.name || 'Talent Seeker'
+    }
+    setUserProfile(normalizedProfile)
     setMatchedCompanies(companies)
     setParticipantCount(prev => prev + 1)
     setView('results')
@@ -199,60 +205,85 @@ function HeroSection({ onStartQuiz, onViewGlobe, participantCount }: { onStartQu
           ))}
         </motion.div>
 
-        {/* CTA Button */}
-        <motion.button
+        {/* Primary CTA - Pin Your Impact */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={onStartQuiz}
-          className="group relative px-10 py-4 rounded-2xl bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-500 hover:to-blue-500 text-white font-bold text-lg shadow-[0_20px_60px_rgba(34,197,94,0.3)] overflow-hidden"
+          className="mb-8"
         >
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
-            animate={{ x: '150%' }}
-            transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
-          />
-          <span className="relative z-10 flex items-center gap-2">
-            Start Your Journey
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </span>
-        </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.03, y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={onStartQuiz}
+            className="group w-full max-w-2xl mx-auto px-10 py-6 rounded-xl bg-[#166534] hover:bg-[#0d4620] text-white font-bold text-xl shadow-2xl transition-all border border-[#1e7741] flex flex-col items-center gap-2"
+          >
+            <span className="text-2xl">📍 Pin Your Impact</span>
+            <span className="text-sm font-medium text-green-200">AI-Powered Matching</span>
+          </motion.button>
+        </motion.div>
 
-        {/* Globe Explorer Button */}
-        <motion.button
+        {/* Secondary Buttons Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+        >
+          {/* Explore Map Button */}
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={onViewGlobe}
+            className="px-8 py-4 rounded-lg bg-[#1e40af] hover:bg-[#1e3a8a] text-white font-bold text-lg shadow-lg transition-all border border-[#3b82f6] flex items-center justify-center gap-2"
+          >
+            <Globe className="w-5 h-5" />
+            <span>🌍 Explore Map</span>
+          </motion.button>
+
+          {/* Remote Jobs Button */}
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => window.location.href = '/remote-jobs'}
+            className="px-8 py-4 rounded-lg border-2 border-[#166534] hover:bg-[#166534]/10 text-[#166534] hover:text-white font-bold text-lg transition-all flex items-center justify-center gap-2"
+          >
+            <span>🌐 Remote Jobs Worldwide</span>
+          </motion.button>
+        </motion.div>
+
+        {/* Bottom Action Buttons */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={onViewGlobe}
-          className="group relative px-10 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-lg shadow-[0_20px_60px_rgba(6,182,212,0.3)] overflow-hidden mt-6"
+          className="grid grid-cols-2 gap-4 max-w-lg mx-auto mb-8"
         >
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
-            animate={{ x: '150%' }}
-            transition={{ duration: 1.5, repeat: Infinity, delay: 0.7 }}
-          />
-          <span className="relative z-10 flex items-center gap-2">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-            >
-              <Globe className="w-5 h-5" />
-            </motion.div>
-            Explore Companies Near Me
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </span>
-        </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => window.location.href = '/remote-jobs'}
+            className="px-6 py-3 rounded-lg bg-[#1e40af] hover:bg-[#1e3a8a] text-white font-bold shadow-lg transition-all border border-[#3b82f6] flex items-center justify-center gap-2 text-sm"
+          >
+            <span>🔍 Find Jobs</span>
+          </motion.button>
 
-        {/* Secondary Button */}
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => window.location.href = '/companies'}
+            className="px-6 py-3 rounded-lg bg-[#166534] hover:bg-[#0d4620] text-white font-bold shadow-lg transition-all border border-[#1e7741] flex items-center justify-center gap-2 text-sm"
+          >
+            <span>🏢 Browse Companies</span>
+          </motion.button>
+        </motion.div>
+
+        {/* Info Text */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-6 text-gray-400 text-sm"
+          transition={{ delay: 0.55 }}
+          className="text-gray-400 text-sm"
         >
           Takes only 5 minutes • Completely free • No sign-up required
         </motion.p>
@@ -291,7 +322,7 @@ function ResultsSection({
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-black mb-4">
-            <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Your Top 5 Impact Matches</span>
+            <span className="bg-linear-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Your Top 5 Impact Matches</span>
           </h2>
           <p className="text-gray-300 text-lg">
             Based on your {profile.skills?.join(', ')} expertise, here are the best-fit companies and current opportunities.
@@ -306,13 +337,13 @@ function ResultsSection({
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="group p-6 md:p-8 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-green-400/50 transition-all duration-300 backdrop-blur-sm"
+              className="group p-6 md:p-8 rounded-2xl bg-linear-to-br from-white/5 to-white/2 border border-white/10 hover:border-green-400/50 transition-all duration-300 backdrop-blur-sm"
             >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                 {/* Company Info */}
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center text-white font-bold">
+                    <div className="w-12 h-12 rounded-lg bg-linear-to-br from-green-500 to-blue-500 flex items-center justify-center text-white font-bold">
                       {index + 1}
                     </div>
                     <div>
@@ -333,7 +364,7 @@ function ResultsSection({
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ x: 4 }}
-                        className="block p-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-green-400/30 transition-all"
+                        className="block p-3 rounded-lg bg-white/3 border border-white/5 hover:border-green-400/30 transition-all"
                       >
                         <div className="flex items-start justify-between gap-3">
                           <div>
@@ -362,29 +393,33 @@ function ResultsSection({
           transition={{ delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <button
+          <motion.button
             onClick={onViewMap}
-            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-8 py-4 rounded-lg bg-[#1e40af] hover:bg-[#1e3a8a] text-white font-bold transition-colors shadow-md border border-[#3b82f6] flex items-center justify-center gap-2"
           >
             <MapPin className="w-5 h-5" />
             View Talent Map
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={onViewGlobe}
-            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-8 py-4 rounded-lg bg-[#166534] hover:bg-[#0d4620] text-white font-bold transition-colors shadow-md border border-[#1e7741] flex items-center justify-center gap-2"
           >
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}>
-              <Globe className="w-5 h-5" />
-            </motion.div>
+            <Globe className="w-5 h-5" />
             Explore on Globe
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={onViewPassport}
-            className="group px-8 py-4 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-8 py-4 rounded-lg bg-[#166534] hover:bg-[#0d4620] text-white font-bold transition-colors shadow-md border border-[#1e7741] flex items-center justify-center gap-2"
           >
             <Landmark className="w-5 h-5" />
             My Talent Passport
-          </button>
+          </motion.button>
           <a
             href="/remote-jobs"
             className="px-8 py-4 rounded-xl border-2 border-green-400/50 hover:border-green-400 text-white font-bold transition-all text-center"

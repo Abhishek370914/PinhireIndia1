@@ -178,7 +178,7 @@ export default function GlobeExplorer({ onClose }: { onClose?: () => void }) {
       <motion.div
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="absolute top-0 left-0 right-0 p-4 z-30 bg-gradient-to-b from-black/80 to-transparent"
+        className="absolute top-0 left-0 right-0 p-4 z-30 bg-linear-to-b from-black/80 to-transparent"
       >
         <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
           <div>
@@ -195,7 +195,7 @@ export default function GlobeExplorer({ onClose }: { onClose?: () => void }) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleExploreNearMe}
-              className="px-6 py-3 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-500 hover:to-blue-500 text-white font-bold rounded-2xl shadow-lg transition-all flex items-center gap-2 whitespace-nowrap"
+              className="px-6 py-3 bg-linear-to-r from-green-600 to-blue-600 hover:from-green-500 hover:to-blue-500 text-white font-bold rounded-2xl shadow-lg transition-all flex items-center gap-2 whitespace-nowrap"
             >
               <MapPin className="w-5 h-5" />
               Explore Companies Near Me
@@ -221,7 +221,7 @@ export default function GlobeExplorer({ onClose }: { onClose?: () => void }) {
           initial={{ x: 400, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 400, opacity: 0 }}
-          className="absolute right-0 top-0 bottom-0 w-96 bg-gradient-to-b from-slate-900/95 to-black/95 border-l border-white/10 overflow-y-auto z-20 p-6 backdrop-blur"
+          className="absolute right-0 top-0 bottom-0 w-96 bg-linear-to-b from-slate-900/95 to-black/95 border-l border-white/10 overflow-y-auto z-20 p-6 backdrop-blur"
         >
           {/* Close Button */}
           <motion.button
@@ -236,7 +236,7 @@ export default function GlobeExplorer({ onClose }: { onClose?: () => void }) {
             {/* Company Header */}
             <div>
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 rounded-xl bg-linear-to-br from-blue-500 to-blue-700 flex items-center justify-center shrink-0">
                   <span className="text-white font-bold text-lg">
                     {selectedCompany.name?.[0]?.toUpperCase()}
                   </span>
@@ -312,7 +312,7 @@ export default function GlobeExplorer({ onClose }: { onClose?: () => void }) {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
-              className="block w-full p-3 text-center bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all"
+              className="block w-full p-3 text-center bg-linear-to-r from-green-600 to-blue-600 hover:from-green-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all"
             >
               Visit Company Website →
             </motion.a>

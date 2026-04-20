@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, memo, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Share2, Landmark, Users, Zap } from 'lucide-react'
 import PassportCard, { PassportData } from './PassportCard'
@@ -23,7 +23,7 @@ interface TalentPassportProps {
   onClose?: () => void
 }
 
-export default function TalentPassport({
+function TalentPassportComponent({
   userProfile,
   userLocation,
   voiceEcho,
@@ -33,19 +33,13 @@ export default function TalentPassport({
   const [view, setView] = useState<'card' | 'leaderboard'>('card')
   const [copied, setCopied] = useState(false)
 
-  // Calculate impact score
-  const calculateImpactScore = (): number => {
-    let score = 500 // Base score
-
-    // Skills match (5 companies per skill)
+  // Memoized impact score calculation
+  const impactScore = useMemo(() => {
+    let score = 500
     if (userProfile?.skills) {
       score += userProfile.skills.length * 50
     }
-
-    // Companies matched
     score += matchedCompanies.length * 75
-
-    // Experience level
     const expMultiplier =
       userProfile?.experience === 'Senior (8+ yrs)'
         ? 2
@@ -76,7 +70,7 @@ export default function TalentPassport({
     }
 
     return Math.floor(score * expMultiplier)
-  }
+  }, [userProfile, userLocation, voiceEcho, matchedCompanies])
 
   // Get top 3 matched jobs
   const getTopJobs = () => {
@@ -146,7 +140,7 @@ export default function TalentPassport({
 
   const passportData: PassportData = {
     name: userProfile?.name || 'Rare Earth Talent',
-    impactScore: calculateImpactScore(),
+    impactScore: impactScore,
     globalRank,
     location: getLocationInfo(),
     voiceEcho,
@@ -191,7 +185,7 @@ export default function TalentPassport({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 px-4 py-12 relative overflow-hidden"
+        className="min-h-screen bg-linear-to-b from-slate-900 via-blue-900 to-slate-900 px-4 py-12 relative overflow-hidden"
       >
         {/* Background Glows */}
         <div className="absolute inset-0 pointer-events-none">
@@ -233,12 +227,12 @@ export default function TalentPassport({
           className="max-w-4xl mx-auto mb-8 flex gap-4 justify-center"
         >
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => setView('card')}
-            className={`px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-all ${
+            className={`px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-all ${
               view === 'card'
-                ? 'bg-gradient-to-r from-green-600 to-blue-600 text-white shadow-lg'
+                ? 'bg-[#166534] text-white shadow-md border border-[#1e7741]'
                 : 'bg-white/10 border border-white/20 text-gray-300 hover:bg-white/20'
             }`}
           >
@@ -246,12 +240,12 @@ export default function TalentPassport({
             My Passport
           </motion.button>
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => setView('leaderboard')}
-            className={`px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-all ${
+            className={`px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-all ${
               view === 'leaderboard'
-                ? 'bg-gradient-to-r from-green-600 to-blue-600 text-white shadow-lg'
+                ? 'bg-[#1e40af] text-white shadow-md border border-[#3b82f6]'
                 : 'bg-white/10 border border-white/20 text-gray-300 hover:bg-white/20'
             }`}
           >
@@ -303,10 +297,10 @@ export default function TalentPassport({
                 className="mt-8"
               >
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={sharePassport}
-                  className="w-full p-4 rounded-xl bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-500 hover:to-blue-500 text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg"
+                  className="w-full p-4 rounded-lg bg-[#166534] hover:bg-[#0d4620] text-white font-bold flex items-center justify-center gap-2 transition-colors shadow-md border border-[#1e7741]"
                 >
                   <Share2 className="w-5 h-5" />
                   {copied ? 'Link Copied! 🎉' : 'Share My Passport'}
@@ -330,3 +324,6 @@ export default function TalentPassport({
     </AnimatePresence>
   )
 }
+
+// Memoize to prevent unnecessary re-renders when props haven't changed
+export default memo(TalentPassportComponent)
