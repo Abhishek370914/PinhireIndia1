@@ -205,7 +205,7 @@ function HeroSection({ onStartQuiz, onViewGlobe, participantCount }: { onStartQu
           ))}
         </motion.div>
 
-        {/* Primary CTA - Pin Your Impact */}
+        {/* Primary CTA - Pin Your Impact (Top Hero Button) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -213,66 +213,72 @@ function HeroSection({ onStartQuiz, onViewGlobe, participantCount }: { onStartQu
           className="mb-8"
         >
           <motion.button
-            whileHover={{ scale: 1.03, y: -4 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.03, y: -2, boxShadow: '0 20px 40px rgba(255, 98, 0, 0.3)' }}
+            whileTap={{ scale: 0.97, backgroundColor: '#E05500' }}
             onClick={onStartQuiz}
-            className="group w-full max-w-2xl mx-auto px-10 py-6 rounded-xl bg-[#166534] hover:bg-[#0d4620] text-white font-bold text-xl shadow-2xl transition-all border border-[#1e7741] flex flex-col items-center gap-2"
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="group w-full max-w-2xl mx-auto px-10 py-6 rounded-[16px] bg-[#FF6200] hover:bg-[#FF6200] text-white font-bold text-xl shadow-lg transition-all flex flex-col items-center gap-2"
           >
             <span className="text-2xl">📍 Pin Your Impact</span>
-            <span className="text-sm font-medium text-green-200">AI-Powered Matching</span>
+            <span className="text-sm font-medium text-white/90">AI-POWERED MATCHING</span>
           </motion.button>
         </motion.div>
 
-        {/* Secondary Buttons Row */}
+        {/* Middle Row (Two Buttons Side-by-Side) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+          className="flex flex-col md:flex-row gap-4 justify-center mb-8 w-full max-w-3xl mx-auto px-4"
         >
-          {/* Explore Map Button */}
+          {/* Left: Explore Map (Dark Slate) */}
           <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.03, y: -2, boxShadow: '0 12px 24px rgba(0, 0, 0, 0.3)' }}
+            whileTap={{ scale: 0.97, backgroundColor: '#151d26' }}
             onClick={onViewGlobe}
-            className="px-8 py-4 rounded-lg bg-[#1e40af] hover:bg-[#1e3a8a] text-white font-bold text-lg shadow-lg transition-all border border-[#3b82f6] flex items-center justify-center gap-2"
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="flex-1 px-8 py-4 rounded-[16px] bg-[#1e2937] text-white font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2"
           >
-            <Globe className="w-5 h-5" />
             <span>🌍 Explore Map</span>
           </motion.button>
 
-          {/* Remote Jobs Button */}
+          {/* Right: Remote Jobs Worldwide (Bright Orange) */}
           <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.03, y: -2, boxShadow: '0 12px 24px rgba(255, 98, 0, 0.2)' }}
+            whileTap={{ scale: 0.97, backgroundColor: '#E05500' }}
             onClick={() => window.location.href = '/remote-jobs'}
-            className="px-8 py-4 rounded-lg border-2 border-[#166534] hover:bg-[#166534]/10 text-[#166534] hover:text-white font-bold text-lg transition-all flex items-center justify-center gap-2"
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="flex-1 px-8 py-4 rounded-[16px] bg-[#FF6200] text-white font-bold text-lg shadow-md transition-all flex items-center justify-center gap-2"
           >
             <span>🌐 Remote Jobs Worldwide</span>
           </motion.button>
         </motion.div>
 
-        {/* Bottom Action Buttons */}
+        {/* Bottom Row (Two Buttons: Dark Background + Orange Border) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="grid grid-cols-2 gap-4 max-w-lg mx-auto mb-8"
+          className="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto w-full px-4 mb-8"
         >
+          {/* Find Jobs Button */}
           <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.03, y: -2, boxShadow: '0 12px 24px rgba(255, 98, 0, 0.2)' }}
+            whileTap={{ scale: 0.97, backgroundColor: '#1a1f25' }}
             onClick={() => window.location.href = '/remote-jobs'}
-            className="px-6 py-3 rounded-lg bg-[#1e40af] hover:bg-[#1e3a8a] text-white font-bold shadow-lg transition-all border border-[#3b82f6] flex items-center justify-center gap-2 text-sm"
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="flex-1 px-6 py-4 rounded-[16px] bg-[#0a0a0a] border-2 border-[#FF6200] text-[#FF6200] font-bold text-lg transition-all flex items-center justify-center gap-2 hover:border-[#E05500] hover:text-[#E05500]"
           >
             <span>🔍 Find Jobs</span>
           </motion.button>
 
+          {/* Browse Companies Button */}
           <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.03, y: -2, boxShadow: '0 12px 24px rgba(255, 98, 0, 0.2)' }}
+            whileTap={{ scale: 0.97, backgroundColor: '#1a1f25' }}
             onClick={() => window.location.href = '/companies'}
-            className="px-6 py-3 rounded-lg bg-[#166534] hover:bg-[#0d4620] text-white font-bold shadow-lg transition-all border border-[#1e7741] flex items-center justify-center gap-2 text-sm"
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="flex-1 px-6 py-4 rounded-[16px] bg-[#0a0a0a] border-2 border-[#FF6200] text-[#FF6200] font-bold text-lg transition-all flex items-center justify-center gap-2 hover:border-[#E05500] hover:text-[#E05500]"
           >
             <span>🏢 Browse Companies</span>
           </motion.button>
