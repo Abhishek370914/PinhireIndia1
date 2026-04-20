@@ -175,73 +175,79 @@ export default function WelcomePage() {
               <VisitorCounter3D />
             </motion.div>
 
-            {/* Professional CTAs */}
+            {/* Professional CTAs - Black + Orange Theme */}
             <motion.div variants={item} className="flex flex-col items-center justify-center gap-6 pt-4 w-full">
-              {/* Featured Pin Your Impact Button */}
-              <Link href="/pin-your-impact" className="w-full max-w-2xl">
+              {/* Featured Pin Your Impact Button - Bright Orange */}
+              <Link href="/pin-your-impact" className="w-full max-w-2xl px-4">
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-[#166534] hover:bg-[#0d4620] text-white font-bold text-xl h-20 px-6 rounded-xl transition-colors duration-300 flex items-center justify-center gap-4 shadow-lg hover:shadow-xl border border-[#1e7741]"
+                  whileHover={{ scale: 1.03, boxShadow: '0 20px 40px rgba(255, 98, 0, 0.3)' }}
+                  whileTap={{ scale: 0.97, backgroundColor: '#E05500' }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  className="w-full bg-[#FF6200] text-white font-bold text-lg h-20 px-6 rounded-[16px] flex items-center justify-center gap-4 shadow-lg transition-all"
                 >
                   <Sparkles className="w-6 h-6" />
                   <div className="flex flex-col items-start">
-                    <span className="text-xs uppercase tracking-widest opacity-90">AI-Powered Matching</span>
-                    <span className="text-xl font-black">Pin Your Impact</span>
+                    <span className="text-xs uppercase tracking-widest">AI-Powered Matching</span>
+                    <span className="text-2xl font-black">Pin Your Impact</span>
                   </div>
                   <ArrowRight className="w-5 h-5 ml-auto" />
                 </motion.button>
               </Link>
 
-              {/* Secondary CTAs */}
-              <motion.div className="flex flex-col md:flex-row items-center justify-center gap-6 w-full">
+              {/* Middle Row - Explore Map (Dark Slate) + Remote Jobs (Orange) */}
+              <motion.div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-3xl px-4">
+                {/* Explore Map - Dark Slate */}
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.03, boxShadow: '0 12px 24px rgba(0, 0, 0, 0.3)' }}
+                  whileTap={{ scale: 0.97, backgroundColor: '#151d26' }}
                   onClick={handleExploreClick}
-                  className="flex-1 max-w-md bg-[#1e40af] hover:bg-[#1e3a8a] text-white font-bold text-lg h-16 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg border border-[#3b82f6]"
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  className="flex-1 w-full bg-[#1e2937] text-white font-bold text-lg h-16 px-6 rounded-[16px] flex items-center justify-center gap-3 shadow-md transition-all"
                 >
                   <MapPin className="w-5 h-5" />
-                  <span>Explore Map</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>🌍 Explore Map</span>
+                  <ArrowRight className="w-4 h-4 ml-auto" />
                 </motion.button>
+
+                {/* Remote Jobs Worldwide - Bright Orange */}
+                <Link href="/remote-jobs" className="flex-1 w-full">
+                  <motion.button
+                    whileHover={{ scale: 1.03, boxShadow: '0 12px 24px rgba(255, 98, 0, 0.2)' }}
+                    whileTap={{ scale: 0.97, backgroundColor: '#E05500' }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="w-full bg-[#FF6200] text-white font-bold text-lg h-16 px-6 rounded-[16px] flex items-center justify-center gap-3 shadow-md transition-all"
+                  >
+                    <Globe className="w-5 h-5" />
+                    <span>🌐 Remote Jobs Worldwide</span>
+                  </motion.button>
+                </Link>
               </motion.div>
 
-              {/* Remote Jobs Button */}
-              <Link href="/remote-jobs" className="w-full max-w-md">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-[#166534] hover:bg-[#0d4620] text-white font-bold text-lg h-16 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg border border-[#1e7741]"
-                >
-                  <Globe className="w-5 h-5" />
-                  <span>Remote Jobs Worldwide</span>
-                </motion.button>
-              </Link>
-
-              {/* Bottom Action Row */}
-              <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+              {/* Bottom Action Row - Dark Background + Orange Border + Orange Text */}
+              <div className="flex flex-col sm:flex-row gap-4 w-full max-w-3xl px-4 justify-center">
                 {/* Find Jobs Button */}
-                <Link href="/jobs" className="flex-1 max-w-xs">
+                <Link href="/jobs" className="flex-1">
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-[#1e40af] hover:bg-[#1e3a8a] text-white font-bold text-base h-14 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg border border-[#3b82f6]"
+                    whileHover={{ scale: 1.03, boxShadow: '0 12px 24px rgba(255, 98, 0, 0.2)' }}
+                    whileTap={{ scale: 0.97, backgroundColor: '#1a1f25' }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="w-full bg-[#0a0a0a] border-2 border-[#FF6200] text-[#FF6200] font-bold text-base h-14 px-6 rounded-[16px] flex items-center justify-center gap-2 shadow-md transition-all hover:border-[#E05500] hover:text-[#E05500]"
                   >
                     <Search className="w-4 h-4" />
-                    <span>Find Jobs</span>
+                    <span>🔍 Find Jobs</span>
                   </motion.button>
                 </Link>
 
                 {/* Browse Companies Button */}
-                <Link href="/companies" className="flex-1 max-w-xs">
+                <Link href="/companies" className="flex-1">
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full bg-[#166534] hover:bg-[#0d4620] text-white font-bold text-base h-14 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg border border-[#1e7741]"
+                    whileHover={{ scale: 1.03, boxShadow: '0 12px 24px rgba(255, 98, 0, 0.2)' }}
+                    whileTap={{ scale: 0.97, backgroundColor: '#1a1f25' }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    className="w-full bg-[#0a0a0a] border-2 border-[#FF6200] text-[#FF6200] font-bold text-base h-14 px-6 rounded-[16px] flex items-center justify-center gap-2 shadow-md transition-all hover:border-[#E05500] hover:text-[#E05500]"
                   >
                     <Store className="w-4 h-4" />
-                    <span>Browse Companies</span>
+                    <span>🏢 Browse Companies</span>
                   </motion.button>
                 </Link>
               </div>
