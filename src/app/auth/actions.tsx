@@ -94,9 +94,7 @@ export async function signUp(formData: FormData) {
   }
 }
 
-export async function signInWithGoogle() {
-  await authSignIn("google", { redirectTo: "/explore" })
-}
+
 
 export async function signOut() {
   await authSignOut({ redirectTo: "/auth/login" })
